@@ -1,0 +1,33 @@
+  <form [formGroup]="adForm" (ngSubmit)="onSubmit()" class="p-fluid">
+    <div class="grid p-4">
+      <div class="col-12 md:col-6 lg:col-4 mb-4">
+        <label for="title" class="block mb-2">Title</label>
+        <input id="title" type="text" pInputText formControlName="title">
+        <small *ngIf="adForm.get('title')?.invalid && adForm.get('title')?.touched" class="p-error block mt-1">Title is required</small>
+      </div>
+
+      <div class="col-12 mb-4">
+        <label for="description" class="block mb-2">Description</label>
+        <textarea id="description" rows="5" pInputTextarea formControlName="description"></textarea>
+        <small *ngIf="adForm.get('description')?.invalid && adForm.get('description')?.touched" class="p-error block mt-1">Description is required</small>
+      </div>
+
+
+      <div formGroupName="contactInfo" class="col-12 md:col-6 lg:col-4 mb-4">
+        <label for="fullName" class="block mb-2">Full Name</label>
+        <input id="fullName" type="text" pInputText formControlName="fullName">
+        <small *ngIf="adForm.get('contactInfo.fullName')?.invalid && adForm.get('contactInfo.fullName')?.touched" class="p-error block mt-1">Full Name is required</small>
+      </div>
+
+      <div formGroupName="contactInfo" class="col-12 md:col-6 lg:col-4 mb-4">
+        <label for="email" class="block mb-2">Email</label>
+        <input id="email" type="email" pInputText formControlName="email">
+        <small *ngIf="adForm.get('contactInfo.email')?.invalid && adForm.get('contactInfo.email')?.touched" class="p-error block mt-1">Valid email is required</small>
+      </div>
+
+
+      <div class="col-12 flex justify-content-end">
+        <p-button type="submit" label="Submit" [disabled]="adForm.invalid" styleClass="p-button-raised"></p-button>
+      </div>
+    </div>
+  </form>
