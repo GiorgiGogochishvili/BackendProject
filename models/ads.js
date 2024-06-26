@@ -19,5 +19,5 @@ const adSchema = new mongoose.Schema({
     }
 });
 
-const STModel = mongoose.model('advertisements', adSchema);
-module.exports = STModel;
+const Model = mongoose.model('advertisements', adSchema);
+module.exports = Model;
