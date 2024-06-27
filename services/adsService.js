@@ -46,5 +46,18 @@ module.exports = {
         } catch (error) {
             res.status(500).json(error);
         }
+    },
+    approve: async (req, res) => {
+        try {
+            const item = await adsModel.findByIdAndUpdate(req.params.id,
+                { isApproved: true },
+                {
+                    new: true
+                }
+            );
+            res.json(item);
+        } catch (error) {
+            res.status(500).json(error);
+        }
     }
 }

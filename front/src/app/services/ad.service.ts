@@ -11,8 +11,8 @@ export class AdService {
 
   constructor(private http: HttpClient) { }
 
-  getAllAds(): Observable<Ad> {
-    return this.http.get<any>(`${this.apiUrl}/getAll`);
+  getAllAds(): Observable<Ad[]> {
+    return this.http.get<Ad[]>(`${this.apiUrl}/all`);
   }
 
   getAdById(id: string): Observable<any> {
@@ -24,10 +24,14 @@ export class AdService {
   }
 
   updateAd(id: string, updatedAd: Ad): Observable<any> {
-    return this.http.put<any>(`${this.apiUrl}/update/${id}`, updatedAd);
+    return this.http.put<any>(`${this.apiUrl}/${id}`, updatedAd);
   }
 
   deleteAd(id: string): Observable<any> {
-    return this.http.delete<any>(`${this.apiUrl}/delete/${id}`);
+    return this.http.delete<any>(`${this.apiUrl}/${id}`);
+  }
+
+  approveAd(id: string): Observable<any> {
+    return this.http.put<any>(`${this.apiUrl}/approve/${id}`, {});
   }
 }

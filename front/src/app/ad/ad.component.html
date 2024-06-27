@@ -1,3 +1,7 @@
+<button pButton type="button" label="Submit Advertisement" icon="pi pi-external-link" style="margin-left:40.4vw;margin-top:5px;" (click)="showDialog()"></button>
+<button pButton type="button" label="Add initial Records   " icon="pi pi-external-link" style="margin-left:40.4vw;margin-top:2vw;padding-right:2.5vw;" (click)="addInitialRecords()"></button>
+
+<p-dialog header="Ad Form" [(visible)]="displayModal" [modal]="true" [style]="{width: '50vw'}" [closable]="false">
   <form [formGroup]="adForm" (ngSubmit)="onSubmit()" class="p-fluid">
     <div class="grid p-4">
       <div class="col-12 md:col-6 lg:col-4 mb-4">
@@ -12,7 +16,6 @@
         <small *ngIf="adForm.get('description')?.invalid && adForm.get('description')?.touched" class="p-error block mt-1">Description is required</small>
       </div>
 
-
       <div formGroupName="contactInfo" class="col-12 md:col-6 lg:col-4 mb-4">
         <label for="fullName" class="block mb-2">Full Name</label>
         <input id="fullName" type="text" pInputText formControlName="fullName">
@@ -25,9 +28,68 @@
         <small *ngIf="adForm.get('contactInfo.email')?.invalid && adForm.get('contactInfo.email')?.touched" class="p-error block mt-1">Valid email is required</small>
       </div>
 
-
       <div class="col-12 flex justify-content-end">
-        <p-button type="submit" label="Submit" [disabled]="adForm.invalid" styleClass="p-button-raised"></p-button>
+        <button pButton type="button" label="Cancel" icon="pi pi-times" (click)="hideDialog()" styleClass="p-button-secondary p-mr-2"></button>
+        <button pButton type="submit" label="Submit" [disabled]="adForm.invalid" styleClass="p-button-raised"></button>
       </div>
     </div>
   </form>
+</p-dialog>
+
+<div>
+  <h1 style="margin-left:39vw;">ADVERTISEMENTS</h1>
+  <div class="ad-container" *ngFor="let ad of ads" >
+    <div class="ad-card" *ngIf="ad.isApproved">
+      <h2>Title <br>  {{ ad.title }}</h2>
+      <p>Description <br>{{ ad.description }}</p>
+      <div class="contact-info" *ngFor="let contact of ad.contactInfo">
+        <p><strong>Contact:</strong> {{ contact.fullName }}</p>
+        <p><strong>Email:</strong> {{ contact.email }}</p>
+
+      </div>
+      <span (click)="deleteAd(ad._id)" *ngIf="isAdmin" class="admin-mark">
+            DELETE X
+        </span>
+      <span (click)="showEditDialog(ad._id)" *ngIf="isAdmin" class="adminedit-mark">
+            EDIT X
+        </span>
+      <p-dialog header="Edit Form" [(visible)]="showEdit[ad._id]" [modal]="true" [style]="{width: '50vw'}" [closable]="false">
+        <form [formGroup]="editAdForm" (ngSubmit)="onSubmitEdit(this.ad._id)" class="p-fluid">
+          <div class="grid p-4">
+            <div class="col-12 md:col-6 lg:col-4 mb-4">
+              <label for="title" class="block mb-2">Title</label>
+              <input id="title" type="text" pInputText formControlName="title">
+              <small *ngIf="editAdForm.get('title')?.invalid && editAdForm.get('title')?.touched" class="p-error block mt-1">Title is required</small>
+            </div>
+
+            <div class="col-12 mb-4">
+              <label for="description" class="block mb-2">Description</label>
+              <textarea id="description" rows="5" pInputTextarea formControlName="description"></textarea>
+              <small *ngIf="editAdForm.get('description')?.invalid && editAdForm.get('description')?.touched" class="p-error block mt-1">Description is required</small>
+            </div>
+
+            <div formGroupName="contactInfo" class="col-12 md:col-6 lg:col-4 mb-4">
+              <label for="fullName" class="block mb-2">Full Name</label>
+              <input id="fullName" type="text" pInputText formControlName="fullName">
+              <small *ngIf="editAdForm.get('contactInfo.fullName')?.invalid && editAdForm.get('contactInfo.fullName')?.touched" class="p-error block mt-1">Full Name is required</small>
+            </div>
+
+            <div formGroupName="contactInfo" class="col-12 md:col-6 lg:col-4 mb-4">
+              <label for="email" class="block mb-2">Email</label>
+              <input id="email" type="email" pInputText formControlName="email">
+              <small *ngIf="editAdForm.get('contactInfo.email')?.invalid && editAdForm.get('contactInfo.email')?.touched" class="p-error block mt-1">Valid email is required</small>
+            </div>
+
+            <div class="col-12 flex justify-content-end">
+              <button pButton type="button" label="Cancel" icon="pi pi-times" (click)="hideEditDialog(ad._id)" styleClass="p-button-secondary p-mr-2"></button>
+              <button pButton type="submit" label="Submit" [disabled]="editAdForm.invalid" styleClass="p-button-raised"></button>
+            </div>
+          </div>
+        </form>
+      </p-dialog>
+
+    </div>
+  </div>
+</div>
+
+

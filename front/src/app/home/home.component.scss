@@ -3,34 +3,34 @@
     padding: 0;
     box-sizing: border-box;
   }
-  
+
   .header {
     background-color: black;
     width: 100%;
   }
-  
+
   .container {
     max-width: 1200px;
-    margin: 0 auto; 
+    margin: 0 auto;
   }
-  
+
   .header__list {
-    list-style-type: none; 
-    display: flex; 
+    list-style-type: none;
+    display: flex;
   }
-  
+
   .header-nav__link {
-    margin-right: 20px; 
   }
-  
+
   .header-nav__link a {
     text-decoration: none;
-    color: white; 
-    padding: 10px 20px; 
-    display: inline-block; 
+    color: white;
+    padding: 10px ;
+    display: inline-block;
+    margin-right:1vw;
+
   }
-  
+
   .header-nav__link a:hover {
-    background-color: gray; 
+    background-color: gray;
   }
-  

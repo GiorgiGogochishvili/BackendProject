@@ -7,7 +7,10 @@
             <a href="#">HOME</a>
           </li>
           <li class="header-nav__link ml-auto">
-            <a href="#">ADMIN</a>
+            <a routerLink="/admin">ADMIN PANEL</a>
+          </li>
+          <li class="header-nav__link ml-auto">
+            <p-button (onClick)="swapToAdmin()">ADMIN MODE</p-button>
           </li>
         </ul>
       </nav>

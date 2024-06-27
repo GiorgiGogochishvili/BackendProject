@@ -4,6 +4,7 @@ const adSchema = new mongoose.Schema({
     title: { type: String, required: true },
     description: { type: String, required: true },
     date: { type: Date },
+    isApproved: { type: Boolean, default: false },
     contactInfo: [{
         fullName: { type: String },
         email: { type: String }

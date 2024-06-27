@@ -1,0 +1,16 @@
+<div>
+  <h1>Unapproved Ads</h1>
+  <div *ngFor="let ad of unapprovedAds">
+    <div class="ad-card">
+      <h2>{{ ad.title }}</h2>
+      <p>{{ ad.description }}</p>
+      <div *ngFor="let contact of ad.contactInfo">
+        <p><strong>Contact:</strong> {{ contact.fullName }}</p>
+        <p><strong>Email:</strong> {{ contact.email }}</p>
+      </div>
+      <p-button (onClick)="approveAd(ad._id)">Approve</p-button>
+      <p-button class="ml-3" (onClick)="disapproveAd(ad._id)">Disapprove</p-button>
+
+    </div>
+  </div>
+</div>

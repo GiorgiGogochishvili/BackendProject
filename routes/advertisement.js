@@ -8,5 +8,6 @@ router.get('/:id', adsService.getOne);
 router.post('/add',  adsService.add);
 router.delete('/:id',  adsService.delete);
 router.put('/:id', adsService.update);
+router.put('/approve/:id', adsService.approve);
 
 module.exports = router;
